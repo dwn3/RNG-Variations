@@ -3,9 +3,9 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        var rand = new Random();
-        var trueRand = new TrueHitRandom();
-        var gausRand = new GaussianRandom();
+        var rand = new Random(177);
+        var trueRand = new TrueHitRandom(177);
+        var gausRand = new GaussianRandom(177);
         int[] intsRand = new int[100000];
         int[] intsTrue = new int[100000];
         int[] intsGaus = new int[100000];

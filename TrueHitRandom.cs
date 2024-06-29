@@ -1,18 +1,18 @@
 using System;
 
-public class TrueHitRandom : Random
-{
+public class TrueHitRandom : Random {
+    public TrueHitRandom() : base(){}
 
-    protected override double Sample()
-    {
+    public TrueHitRandom(int Seed) : base(Seed){}
+
+    protected override double Sample(){
         return (base.Sample()+ base.Sample()) /2;
     }
-    public override int Next()
-    {
+    public override int Next(){
         return (int) (Sample() * int.MaxValue);
     }
-    public override int Next(int maxValue)
-    {
+    public override int Next(int maxValue){
         return (int) (Sample() * maxValue);
     }
+    public override double NextDouble() => Sample();
 }

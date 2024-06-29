@@ -1,5 +1,3 @@
-using System;
-
 public class TrueHitRandom : Random {
     public TrueHitRandom() : base(){}
 

@@ -1,18 +1,32 @@
-using System;
-
 public class GaussianRandom : Random {
-    public GaussianRandom(){}
-    public GaussianRandom(int Seed) : base(Seed){}
+    private double Mean;
+    private double StandardDeviation;
+    public GaussianRandom(){
+        Mean = 0.5;
+        StandardDeviation = .16667;
+    }
+    public GaussianRandom(int Seed) : base(Seed){
+        Mean = 0.5;
+        StandardDeviation = .16667;
+    }
+    public GaussianRandom(double Mean, double StandardDeviation){
+        this.Mean = Mean;
+        this.StandardDeviation = StandardDeviation;
+    }
+    public GaussianRandom(int Seed, double Mean, double StandardDeviation) : base(Seed){
+        this.Mean = Mean;
+        this.StandardDeviation = StandardDeviation;
+    }
     protected override double Sample(){
         var x = base.Sample();
         var y = base.Sample();
 
-        double rand_normal = .5 + .16667*Math.Sqrt(-2.0 * Math.Log(x)) * Math.Sin(2.0 * Math.PI * y);
-        if(rand_normal <=0)
+        double RandomNormal = Mean + StandardDeviation*Math.Sqrt(-2.0 * Math.Log(x)) * Math.Sin(2.0 * Math.PI * y);
+        if(RandomNormal <=0)
             return 0;
-        if(rand_normal >= 0.99999999999999978)
+        if(RandomNormal >= 0.99999999999999978)
             return 0.99999999999999978; //the max value the default Sample can ever return 
-        return rand_normal;        
+        return RandomNormal;        
     }
     public override int Next(){
         return (int) (Sample() * int.MaxValue);

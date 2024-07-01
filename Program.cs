@@ -2,11 +2,16 @@
 {
     private static void Main(string[] args)
     {
-        var rand = new Random(177);
-        var trueRand = new TrueHitRandom(177);
-        var gausRand = new GaussianRandom(177);
-        var gausRand2 = new GaussianRandom(177, .7, .1);
-        var gausRand3 = new GaussianRandom(.3, .1);
+        Console.WriteLine("Pick an RNG Seed");
+        var seedString = Console.ReadLine();
+        if(String.IsNullOrEmpty(seedString))
+            seedString = "0";
+        int seed = Int32.Parse(seedString);
+        var rand = new Random(seed);
+        var trueRand = new TrueHitRandom(seed);
+        var gausRand = new GaussianRandom(seed);
+        var gausRand2 = new GaussianRandom(seed, .7, .1);
+        var gausRand3 = new GaussianRandom(seed, .3, .1);
         int[] intsRand = new int[100000];
         int[] intsTrue = new int[100000];
         int[] intsGaus = new int[100000];
@@ -22,28 +27,27 @@
         }
 
         if(!Directory.Exists("output"))
-            Directory.CreateDirectory("output");
-            
+            Directory.CreateDirectory("output");            
 
         using(StreamWriter output = new StreamWriter("output/Random.txt")){
-            for(int a = 0; a < 100000; a++)
-                output.WriteLine(intsRand[a]);
+            foreach(int a in intsRand)
+                output.WriteLine(a);
         }
         using(StreamWriter output = new StreamWriter("output/TrueHit.txt")){
-            for(int a = 0; a < 100000; a++)
-                output.WriteLine(intsTrue[a]);
+            foreach(int a in intsTrue)
+                output.WriteLine(a);
         }
         using(StreamWriter output = new StreamWriter("output/Gaus.txt")){
-            for(int a = 0; a < 100000; a++)
-                output.WriteLine(intsGaus[a]);
+            foreach(int a in intsGaus)
+                output.WriteLine(a);
         }
         using(StreamWriter output = new StreamWriter("output/Gaus2.txt")){
-            for(int a = 0; a < 100000; a++)
-                output.WriteLine(intsGaus2[a]);
+            foreach(int a in intsGaus2)
+                output.WriteLine(a);
         }
         using(StreamWriter output = new StreamWriter("output/Gaus3.txt")){
-            for(int a = 0; a < 100000; a++)
-                output.WriteLine(intsGaus3[a]);
+            foreach(int a in intsGaus3)
+                output.WriteLine(a);
         }
     }
 }
